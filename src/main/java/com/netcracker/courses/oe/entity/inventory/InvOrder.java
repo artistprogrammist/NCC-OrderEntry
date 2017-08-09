@@ -1,0 +1,79 @@
+package com.netcracker.courses.oe.entity.inventory;
+
+import com.netcracker.courses.oe.entity.BaseEntity;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
+
+@Entity
+@Table(name = "inv_order")
+@AttributeOverride(name = "id", column = @Column(name = "id_inv_order"))
+public class InvOrder extends BaseEntity {
+
+    private String email;
+
+    private double generalSum;
+
+    @OneToMany(mappedBy = "invOrder",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Item> items;
+
+    public InvOrder() {
+    }
+
+    public InvOrder(String email, List<Item> items, double generalSum) {
+        this.email = email;
+        this.items = items;
+        this.generalSum = generalSum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public double getGeneralSum() {
+        return generalSum;
+    }
+
+    public void setGeneralSum(double generalSum) {
+        this.generalSum = generalSum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        InvOrder invOrder = (InvOrder) o;
+        return Double.compare(invOrder.generalSum, generalSum) == 0 &&
+                Objects.equals(email, invOrder.email) &&
+                Objects.equals(items, invOrder.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), email, items, generalSum);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("InvOrder{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", items=").append(items);
+        sb.append(", generalSum=").append(generalSum);
+        sb.append('}');
+        return sb.toString();
+    }
+}
