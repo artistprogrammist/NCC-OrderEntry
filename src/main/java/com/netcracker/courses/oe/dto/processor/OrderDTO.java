@@ -1,31 +1,24 @@
 package com.netcracker.courses.oe.dto.processor;
 
 import com.netcracker.courses.oe.dto.BaseEntityDTO;
-import com.netcracker.courses.oe.dto.inventory.ItemDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class OrderDTO implements BaseEntityDTO {
-    private long id;
+
     private String email;
-    private List<ItemDTO> items;
+    private double generalSum;
+    private List<ItemDTO> items = new ArrayList<>();
 
     public OrderDTO() {
     }
 
-    public OrderDTO(long id, String email, List<ItemDTO> items) {
-        this.id = id;
+    public OrderDTO(String email, double generalSum, String typeCurrency, List<ItemDTO> items) {
         this.email = email;
+        this.generalSum = generalSum;
         this.items = items;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -34,6 +27,14 @@ public class OrderDTO implements BaseEntityDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public double getGeneralSum() {
+        return generalSum;
+    }
+
+    public void setGeneralSum(double generalSum) {
+        this.generalSum = generalSum;
     }
 
     public List<ItemDTO> getItems() {
@@ -49,21 +50,21 @@ public class OrderDTO implements BaseEntityDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDTO orderDTO = (OrderDTO) o;
-        return id == orderDTO.id &&
+        return Double.compare(orderDTO.generalSum, generalSum) == 0 &&
                 Objects.equals(email, orderDTO.email) &&
                 Objects.equals(items, orderDTO.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, items);
+        return Objects.hash(email, generalSum, items);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Order{");
-        sb.append("id=").append(id);
-        sb.append(", email='").append(email).append('\'');
+        final StringBuilder sb = new StringBuilder("OrderDTO{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", generalSum=").append(generalSum);
         sb.append(", items=").append(items);
         sb.append('}');
         return sb.toString();

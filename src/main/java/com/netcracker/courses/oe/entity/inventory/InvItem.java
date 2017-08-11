@@ -8,15 +8,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "item")
 @AttributeOverride(name = "id", column = @Column(name = "id_item"))
-public class Item extends BaseEntity {
+public class InvItem extends BaseEntity {
 
     private String name;
 
-    private double currencyValue;
-
-    private String currency;
-
-    private long quantity;
+    private double price;
 
     private String producer;
 
@@ -28,14 +24,12 @@ public class Item extends BaseEntity {
     @JoinColumn(name = "id_inv_order")
     private InvOrder invOrder;
 
-    public Item() {
+    public InvItem() {
     }
 
-    public Item(String name, double currencyValue, String currency, long quantity, String producer, String category, String barcode, InvOrder invOrder) {
+    public InvItem(String name, double price, String producer, String category, String barcode, InvOrder invOrder) {
         this.name = name;
-        this.currencyValue = currencyValue;
-        this.currency = currency;
-        this.quantity = quantity;
+        this.price = price;
         this.producer = producer;
         this.category = category;
         this.barcode = barcode;
@@ -50,28 +44,12 @@ public class Item extends BaseEntity {
         this.name = name;
     }
 
-    public double getCurrencyValue() {
-        return currencyValue;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCurrencyValue(double currencyValue) {
-        this.currencyValue = currencyValue;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getProducer() {
@@ -110,31 +88,30 @@ public class Item extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item itemDTO = (Item) o;
-        return quantity == itemDTO.quantity &&
-                Objects.equals(name, itemDTO.name) &&
-                Objects.equals(currencyValue, itemDTO.currencyValue) &&
-                Objects.equals(currency, itemDTO.currency) &&
-                Objects.equals(producer, itemDTO.producer) &&
-                Objects.equals(category, itemDTO.category) &&
-                Objects.equals(barcode, itemDTO.barcode);
+        if (!super.equals(o)) return false;
+        InvItem invItem = (InvItem) o;
+        return Double.compare(invItem.price, price) == 0 &&
+                Objects.equals(name, invItem.name) &&
+                Objects.equals(producer, invItem.producer) &&
+                Objects.equals(category, invItem.category) &&
+                Objects.equals(barcode, invItem.barcode) &&
+                Objects.equals(invOrder, invItem.invOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, currencyValue, currency, quantity, producer, category, barcode);
+        return Objects.hash(super.hashCode(), name, price, producer, category, barcode, invOrder);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Item{");
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", currencyValue='").append(currencyValue).append('\'');
-        sb.append(", currency='").append(currency).append('\'');
-        sb.append(", quantity=").append(quantity);
+        final StringBuilder sb = new StringBuilder("InvItem{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');
         sb.append(", category='").append(category).append('\'');
         sb.append(", barcode='").append(barcode).append('\'');
+        sb.append(", invOrder=").append(invOrder);
         sb.append('}');
         return sb.toString();
     }

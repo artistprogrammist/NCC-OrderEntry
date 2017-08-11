@@ -1,11 +1,13 @@
-package com.netcracker.courses.oe.service.handler;
+package com.netcracker.courses.oe.service.helper;
 
 import com.netcracker.courses.oe.dto.catalog.ProductDTO;
+import com.netcracker.courses.oe.dto.inventory.InvItemDTO;
 import com.netcracker.courses.oe.dto.inventory.InvOrderDTO;
-import com.netcracker.courses.oe.dto.inventory.ItemDTO;
+import com.netcracker.courses.oe.dto.processor.ItemDTO;
+import com.netcracker.courses.oe.dto.processor.OrderDTO;
 import com.netcracker.courses.oe.entity.catalog.Product;
+import com.netcracker.courses.oe.entity.inventory.InvItem;
 import com.netcracker.courses.oe.entity.inventory.InvOrder;
-import com.netcracker.courses.oe.entity.inventory.Item;
 
 import java.util.List;
 
@@ -21,11 +23,17 @@ public interface Converter {
 
     InvOrder toInvOrder(InvOrderDTO invOrderDTO);
 
-    Item toItem(ItemDTO itemDTO);
+    InvItem toInvItem(InvItemDTO invItemDTO);
 
     InvOrderDTO toInvOrderDTO(InvOrder invOrder);
 
-    ItemDTO toItemDTO(Item item);
+    InvItemDTO toInvItemDTO(InvItem invItem);
 
     List<InvOrderDTO> toInvOrdersDTO(List<InvOrder> invOrders);
+
+    ItemDTO toItemDTO(ProductDTO productDTO);
+
+    InvOrderDTO toInvOrderDTO(OrderDTO orderDTO);
+
+    OrderDTO toOrderDTO(InvOrderDTO invOrderDTO);
 }

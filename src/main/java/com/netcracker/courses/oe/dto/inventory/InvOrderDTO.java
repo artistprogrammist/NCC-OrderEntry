@@ -9,13 +9,13 @@ public class InvOrderDTO implements BaseEntityDTO {
 
     private long id;
     private String email;
-    private List<ItemDTO> items;
+    private List<InvItemDTO> items;
     private double generalSum;
 
     public InvOrderDTO() {
     }
 
-    public InvOrderDTO(long id, String email, List<ItemDTO> items, double generalSum) {
+    public InvOrderDTO(long id, String email, List<InvItemDTO> items, double generalSum) {
         this.id = id;
         this.email = email;
         this.items = items;
@@ -38,11 +38,11 @@ public class InvOrderDTO implements BaseEntityDTO {
         this.email = email;
     }
 
-    public List<ItemDTO> getItems() {
+    public List<InvItemDTO> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemDTO> items) {
+    public void setItems(List<InvItemDTO> items) {
         this.items = items;
     }
 

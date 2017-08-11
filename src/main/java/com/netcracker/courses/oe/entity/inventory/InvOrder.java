@@ -15,16 +15,16 @@ public class InvOrder extends BaseEntity {
 
     private double generalSum;
 
-    @OneToMany(mappedBy = "invOrder",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Item> items;
+    @OneToMany(mappedBy = "invOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InvItem> invItems;
 
     public InvOrder() {
     }
 
-    public InvOrder(String email, List<Item> items, double generalSum) {
+    public InvOrder(String email, double generalSum, String typeCurrency, List<InvItem> invItems) {
         this.email = email;
-        this.items = items;
         this.generalSum = generalSum;
+        this.invItems = invItems;
     }
 
     public String getEmail() {
@@ -35,20 +35,20 @@ public class InvOrder extends BaseEntity {
         this.email = email;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
     public double getGeneralSum() {
         return generalSum;
     }
 
     public void setGeneralSum(double generalSum) {
         this.generalSum = generalSum;
+    }
+
+    public List<InvItem> getInvItems() {
+        return invItems;
+    }
+
+    public void setInvItems(List<InvItem> invItems) {
+        this.invItems = invItems;
     }
 
     @Override
@@ -59,20 +59,21 @@ public class InvOrder extends BaseEntity {
         InvOrder invOrder = (InvOrder) o;
         return Double.compare(invOrder.generalSum, generalSum) == 0 &&
                 Objects.equals(email, invOrder.email) &&
-                Objects.equals(items, invOrder.items);
+                Objects.equals(invItems, invOrder.invItems);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), email, items, generalSum);
+        return Objects.hash(super.hashCode(), email, generalSum, invItems);
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         final StringBuilder sb = new StringBuilder("InvOrder{");
         sb.append("email='").append(email).append('\'');
-        sb.append(", items=").append(items);
         sb.append(", generalSum=").append(generalSum);
+        sb.append(", invItems=").append(invItems);
         sb.append('}');
         return sb.toString();
     }

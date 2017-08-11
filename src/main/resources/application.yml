@@ -1,3 +1,7 @@
+url:
+  catalog: ${CATALOG_HOST:http://localhost}:${CATALOG_PORT:9091}
+  inventory: ${INVENTORY_HOST:http://localhost}:${INVENTORY_PORT:9091}
+
 server:
   port: ${SERVER_PORT:9091}
 
@@ -32,3 +36,5 @@ logging:
     ROOT: INFO
     org.springframework: INFO
     org.hibernate: INFO
+flyway:
+  url:

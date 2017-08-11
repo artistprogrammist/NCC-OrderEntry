@@ -3,7 +3,6 @@ package com.netcracker.courses.oe.entity.catalog;
 import com.netcracker.courses.oe.entity.BaseEntity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,28 +12,24 @@ public class Product extends BaseEntity {
 
     private String name;
 
-    private long quantity;
+    private double price;
 
     private String producer;
 
     private String barcode;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Price> price;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category")
     private Category category;
 
     public Product() {
     }
 
-    public Product(String name, long quantity, String producer, String barcode, List<Price> price, Category category) {
+    public Product(String name, double price, String producer, String barcode, Category category) {
         this.name = name;
-        this.quantity = quantity;
+        this.price = price;
         this.producer = producer;
         this.barcode = barcode;
-        this.price = price;
         this.category = category;
     }
 
@@ -46,12 +41,12 @@ public class Product extends BaseEntity {
         this.name = name;
     }
 
-    public long getQuantity() {
-        return quantity;
+    public double getPrice() {
+        return price;
     }
 
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getProducer() {
@@ -70,14 +65,6 @@ public class Product extends BaseEntity {
         this.barcode = barcode;
     }
 
-    public List<Price> getPrice() {
-        return price;
-    }
-
-    public void setPrice(List<Price> price) {
-        this.price = price;
-    }
-
     public Category getCategory() {
         return category;
     }
@@ -92,26 +79,26 @@ public class Product extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Product product = (Product) o;
-        return quantity == product.quantity &&
+        return Double.compare(product.price, price) == 0 &&
                 Objects.equals(name, product.name) &&
                 Objects.equals(producer, product.producer) &&
                 Objects.equals(barcode, product.barcode) &&
-                Objects.equals(price, product.price) &&
                 Objects.equals(category, product.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, quantity, producer, barcode, price, category);
+        return Objects.hash(super.hashCode(), name, price, producer, barcode, category);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Product{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", quantity=").append(quantity);
+        sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');
         sb.append(", barcode='").append(barcode).append('\'');
+        sb.append(", category=").append(category);
         sb.append('}');
         return sb.toString();
     }

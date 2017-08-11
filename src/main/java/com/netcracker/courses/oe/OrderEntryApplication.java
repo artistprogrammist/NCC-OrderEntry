@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OrderEntryApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(OrderEntryApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(OrderEntryApplication.class, args);
+    }
 }

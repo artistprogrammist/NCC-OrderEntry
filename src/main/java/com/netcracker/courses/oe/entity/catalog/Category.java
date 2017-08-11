@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "category")
+@Table(name = "category", indexes = {@Index(name = "idx_cat_name", columnList = "name")})
 @AttributeOverride(name = "id", column = @Column(name = "id_category"))
 public class Category extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
 
     public Category() {

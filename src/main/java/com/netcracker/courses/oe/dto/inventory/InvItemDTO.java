@@ -1,10 +1,10 @@
-package com.netcracker.courses.oe.dto.catalog;
+package com.netcracker.courses.oe.dto.inventory;
 
 import com.netcracker.courses.oe.dto.BaseEntityDTO;
 
 import java.util.Objects;
 
-public class ProductDTO implements BaseEntityDTO {
+public class InvItemDTO implements BaseEntityDTO {
 
     private long id;
     private String name;
@@ -13,10 +13,10 @@ public class ProductDTO implements BaseEntityDTO {
     private String category;
     private String barcode;
 
-    public ProductDTO() {
+    public InvItemDTO() {
     }
 
-    public ProductDTO(long id, String name, double price, String producer, String category, String barcode) {
+    public InvItemDTO(long id, String name, double price, String producer, String category, String barcode) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -77,7 +77,7 @@ public class ProductDTO implements BaseEntityDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductDTO that = (ProductDTO) o;
+        InvItemDTO that = (InvItemDTO) o;
         return id == that.id &&
                 Double.compare(that.price, price) == 0 &&
                 Objects.equals(name, that.name) &&
@@ -93,7 +93,7 @@ public class ProductDTO implements BaseEntityDTO {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProductDTO{");
+        final StringBuilder sb = new StringBuilder("InvItemDTO{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", price=").append(price);

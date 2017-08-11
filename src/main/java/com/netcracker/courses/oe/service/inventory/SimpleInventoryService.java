@@ -5,7 +5,7 @@ import com.netcracker.courses.oe.entity.inventory.InvOrder;
 import com.netcracker.courses.oe.exception.EntityNotFoundException;
 import com.netcracker.courses.oe.repository.inventory.InventoryRepository;
 import com.netcracker.courses.oe.service.InventoryService;
-import com.netcracker.courses.oe.service.handler.Converter;
+import com.netcracker.courses.oe.service.helper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -34,9 +34,7 @@ public class SimpleInventoryService implements InventoryService {
 
     @Override
     public InvOrderDTO update(InvOrderDTO invOrderDTO) {
-        InvOrder invOrder = converter.toInvOrder(invOrderDTO);
-        InvOrder saveInvOrder = inventoryRepository.save(invOrder);
-        return converter.toInvOrderDTO(saveInvOrder);
+        return save(invOrderDTO);
     }
 
     @Override
@@ -56,7 +54,7 @@ public class SimpleInventoryService implements InventoryService {
         try {
             inventoryRepository.delete(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException(e.getMessage());
+            throw new EntityNotFoundException(e.getMessage(), e);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.netcracker.courses.oe.dto.inventory;
+package com.netcracker.courses.oe.dto.processor;
 
 import com.netcracker.courses.oe.dto.BaseEntityDTO;
 
@@ -8,9 +8,7 @@ public class ItemDTO implements BaseEntityDTO {
 
     private long id;
     private String name;
-    private double currencyValue;
-    private String currency;
-    private long quantity;
+    private double price;
     private String producer;
     private String category;
     private String barcode;
@@ -18,12 +16,10 @@ public class ItemDTO implements BaseEntityDTO {
     public ItemDTO() {
     }
 
-    public ItemDTO(long id, String name, double currencyValue, String currency, long quantity, String producer, String category, String barcode) {
+    public ItemDTO(long id, String name, double price, String producer, String category, String barcode) {
         this.id = id;
         this.name = name;
-        this.currencyValue = currencyValue;
-        this.currency = currency;
-        this.quantity = quantity;
+        this.price = price;
         this.producer = producer;
         this.category = category;
         this.barcode = barcode;
@@ -45,28 +41,12 @@ public class ItemDTO implements BaseEntityDTO {
         this.name = name;
     }
 
-    public double getCurrencyValue() {
-        return currencyValue;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCurrencyValue(double currencyValue) {
-        this.currencyValue = currencyValue;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getProducer() {
@@ -99,10 +79,8 @@ public class ItemDTO implements BaseEntityDTO {
         if (o == null || getClass() != o.getClass()) return false;
         ItemDTO itemDTO = (ItemDTO) o;
         return id == itemDTO.id &&
-                Double.compare(itemDTO.currencyValue, currencyValue) == 0 &&
-                quantity == itemDTO.quantity &&
+                Double.compare(itemDTO.price, price) == 0 &&
                 Objects.equals(name, itemDTO.name) &&
-                Objects.equals(currency, itemDTO.currency) &&
                 Objects.equals(producer, itemDTO.producer) &&
                 Objects.equals(category, itemDTO.category) &&
                 Objects.equals(barcode, itemDTO.barcode);
@@ -110,7 +88,7 @@ public class ItemDTO implements BaseEntityDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, currencyValue, currency, quantity, producer, category, barcode);
+        return Objects.hash(id, name, price, producer, category, barcode);
     }
 
     @Override
@@ -118,9 +96,7 @@ public class ItemDTO implements BaseEntityDTO {
         final StringBuilder sb = new StringBuilder("ItemDTO{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
-        sb.append(", currencyValue=").append(currencyValue);
-        sb.append(", currency='").append(currency).append('\'');
-        sb.append(", quantity=").append(quantity);
+        sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');
         sb.append(", category='").append(category).append('\'');
         sb.append(", barcode='").append(barcode).append('\'');
