@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.netcracker.courses.oe.inventory.")
+@EnableJpaRepositories(basePackages = "com.netcracker.courses.oe.inventory.repository")
 public class DataSourceConfig {
 
     @Value("${spring.datasource.hikari.driver-class-name}")
