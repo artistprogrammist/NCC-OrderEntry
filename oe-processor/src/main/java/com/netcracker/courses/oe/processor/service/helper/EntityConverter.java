@@ -1,6 +1,6 @@
 package com.netcracker.courses.oe.processor.service.helper;
 
-import com.netcracker.courses.oe.processor.dto.catalog.ProductDTO;
+import com.netcracker.courses.oe.processor.dto.catalog.OfferDTO;
 import com.netcracker.courses.oe.processor.dto.inventory.InvItemDTO;
 import com.netcracker.courses.oe.processor.dto.inventory.InvOrderDTO;
 import com.netcracker.courses.oe.processor.dto.processor.ItemDTO;
@@ -14,15 +14,15 @@ import java.util.List;
 public class EntityConverter implements Converter {
 
     @Override
-    public ItemDTO toItemDTO(ProductDTO productDTO) {
+    public ItemDTO toItemDTO(OfferDTO offerDTO) {
         ItemDTO itemDTO = new ItemDTO();
-        if (productDTO != null) {
-            itemDTO.setId(productDTO.getId());
-            itemDTO.setName(productDTO.getName());
-            itemDTO.setBarcode(productDTO.getBarcode());
-            itemDTO.setPrice(productDTO.getPrice());
-            itemDTO.setCategory(productDTO.getCategory());
-            itemDTO.setProducer(productDTO.getProducer());
+        if (offerDTO != null) {
+            itemDTO.setId(offerDTO.getId());
+            itemDTO.setName(offerDTO.getName());
+            itemDTO.setBarcode(offerDTO.getBarcode());
+            itemDTO.setPrice(offerDTO.getPrice());
+            itemDTO.setCategory(offerDTO.getCategory());
+            itemDTO.setProducer(offerDTO.getProducer());
         }
         return itemDTO;
     }

@@ -1,6 +1,6 @@
 package com.netcracker.courses.oe.processor.service;
 
-import com.netcracker.courses.oe.processor.dto.catalog.ProductDTO;
+import com.netcracker.courses.oe.processor.dto.catalog.OfferDTO;
 import com.netcracker.courses.oe.processor.dto.inventory.InvOrderDTO;
 import com.netcracker.courses.oe.processor.dto.processor.EntityParameterDTO;
 import com.netcracker.courses.oe.processor.dto.processor.ItemDTO;
@@ -43,10 +43,10 @@ public class SimpleProcessorService implements ProcessorService {
 
     @Override
     public OrderDTO addItem(EntityParameterDTO entityParameterDTO) {
-        ProductDTO productDTO = catalogClient.getProductDTO(entityParameterDTO.getIdItem());
+        OfferDTO offerDTO = catalogClient.getOfferDTO(entityParameterDTO.getIdItem());
         OrderDTO orderDTO = temporaryStorage.get(entityParameterDTO.getEmail());
-        if (orderDTO != null && productDTO.getId() != 0) {
-            ItemDTO itemDTO = converter.toItemDTO(productDTO);
+        if (orderDTO != null && offerDTO.getId() != 0) {
+            ItemDTO itemDTO = converter.toItemDTO(offerDTO);
             orderDTO.getItems().add(itemDTO);
             orderDTO.setGeneralSum(orderDTO.getGeneralSum() + itemDTO.getPrice());
         }

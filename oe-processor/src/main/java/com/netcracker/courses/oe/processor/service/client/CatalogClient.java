@@ -1,6 +1,6 @@
 package com.netcracker.courses.oe.processor.service.client;
 
-import com.netcracker.courses.oe.processor.dto.catalog.ProductDTO;
+import com.netcracker.courses.oe.processor.dto.catalog.OfferDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,14 @@ public class CatalogClient {
         this.restTemplate = restTemplate;
     }
 
-    public ProductDTO getProductDTO(Long id) {
+    public OfferDTO getOfferDTO(Long id) {
         LOGGER.info("Start method getProductDTO Id = {}", id);
         StringBuilder finalUrl = new StringBuilder(urlBase);
         finalUrl.append(API_V1_CATALOG_PRODUCTS);
         finalUrl.append(id);
         LOGGER.info("FinalUrl: {}", finalUrl.toString());
-        ResponseEntity<ProductDTO> responseEntity = restTemplate.exchange(finalUrl.toString(), HttpMethod.GET, createHeaders(), ProductDTO.class);
-        LOGGER.info("ProductDTO: {}", responseEntity.getBody());
+        ResponseEntity<OfferDTO> responseEntity = restTemplate.exchange(finalUrl.toString(), HttpMethod.GET, createHeaders(), OfferDTO.class);
+        LOGGER.info("OfferDTO: {}", responseEntity.getBody());
         return responseEntity.getBody();
     }
 

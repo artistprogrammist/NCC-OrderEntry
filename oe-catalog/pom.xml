@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>catalog</name>
+    <name>oe-catalog</name>
 
     <parent>
         <groupId>com.netcracker.courses</groupId>
