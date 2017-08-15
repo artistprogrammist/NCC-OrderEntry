@@ -28,8 +28,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
-                "OrderEntry Api Documentation",
-                "Contract for MS",
+                "Processor OrderEntry Api Documentation",
+                "Processor MS",
                 "1.0",
                 "urn:tos",
                 new Contact("Alex Nastin", "", "alexnastin1992@gmail.com"),
