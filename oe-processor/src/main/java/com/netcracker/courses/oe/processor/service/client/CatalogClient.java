@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class CatalogClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CatalogClient.class);
-    private static final String API_V1_CATALOG_PRODUCTS = "/api/v1/catalog/products/";
+    private static final String API_V1_CATALOG_PRODUCTS = "/api/v1/catalog/offers/";
 
     private final RestTemplate restTemplate;
 
@@ -28,7 +28,7 @@ public class CatalogClient {
     }
 
     public OfferDTO getOfferDTO(Long id) {
-        LOGGER.info("Start method getProductDTO Id = {}", id);
+        LOGGER.info("Start method getOfferDTO Id = {}", id);
         StringBuilder finalUrl = new StringBuilder(urlBase);
         finalUrl.append(API_V1_CATALOG_PRODUCTS);
         finalUrl.append(id);

@@ -1,0 +1,470 @@
+{
+	"variables": [],
+	"info": {
+		"name": "NCC-OrderEntry",
+		"_postman_id": "d3500b2d-4c4c-c666-b852-b4363233f2f4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "oe-catalog",
+			"description": "",
+			"item": [
+				{
+					"name": "saveOffer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"id_offer\", jsonData.id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_catalog_url}}/catalog/offers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateOffer",
+					"request": {
+						"url": "{{oe_catalog_url}}/catalog/offers",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":{{id_offer}},\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"name\",\r\n  \"price\": 250,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getOfferById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_catalog_url}}/catalog/offers/{{id_offer}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getOffers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_catalog_url}}/catalog/offers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getOfferByCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_catalog_url}}/catalog/offers/category/{{category_name}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOffer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_catalog_url}}/catalog/offers/{{id_offer}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oe-inventory",
+			"description": "",
+			"item": [
+				{
+					"name": "saveOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"id_order\", jsonData.id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_inventory_url}}/inventory/orders",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"email\",\r\n  \"items\": [\r\n    {\r\n      \"name\": \"name\",\r\n      \"price\": 250,\r\n      \"producer\": \"producer\",\r\n      \"category\": \"category\",\r\n      \"barcode\": \"barcode\"\r\n    }\r\n  ],\r\n  \"generalSum\": 250\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder",
+					"request": {
+						"url": "{{oe_inventory_url}}/inventory/orders",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{id_order}},\n    \"email\": \"email2\",\n    \"items\": [\n        {\n            \"name\": \"name\",\n            \"price\": 250,\n            \"producer\": \"producer\",\n            \"category\": \"category\",\n            \"barcode\": \"barcode\"\n        }\n    ],\n    \"generalSum\": 250\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_inventory_url}}/inventory/orders/{{id_order}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getOrders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_inventory_url}}/inventory/orders",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_inventory_url}}/inventory/orders/{{id_order}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oe-processor",
+			"description": "",
+			"item": [
+				{
+					"name": "createOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"email\", jsonData.email);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_proccesor_url}}/processor/order",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "alex"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "addItem",
+					"request": {
+						"url": "{{oe_proccesor_url}}/processor/item",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"idItem\": {{id_offer}}\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "pay",
+					"request": {
+						"url": "{{oe_proccesor_url}}/processor/pay",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{email}}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getOrders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oe_proccesor_url}}/processor/orders",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode\": \"barcode\",\r\n  \"category\": \"category\",\r\n  \"name\": \"string\",\r\n  \"price\": 150,\r\n  \"producer\": \"producer\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

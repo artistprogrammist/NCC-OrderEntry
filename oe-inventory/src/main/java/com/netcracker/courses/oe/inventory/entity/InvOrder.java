@@ -71,7 +71,6 @@ public class InvOrder extends BaseEntity {
         final StringBuilder sb = new StringBuilder("InvOrder{");
         sb.append("email='").append(email).append('\'');
         sb.append(", generalSum=").append(generalSum);
-        sb.append(", invItems=").append(invItems);
         sb.append('}');
         return sb.toString();
     }
