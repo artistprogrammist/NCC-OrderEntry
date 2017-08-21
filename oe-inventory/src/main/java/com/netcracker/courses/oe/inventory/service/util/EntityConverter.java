@@ -35,6 +35,7 @@ public class EntityConverter implements Converter {
             order.setEmail(orderDTO.getEmail());
             order.setGeneralSum(orderDTO.getGeneralSum());
             order.setOrderNumber(orderDTO.getOrderNumber());
+            order.setStatus(orderDTO.getStatus());
             order.setDate(LocalDateTime.parse(orderDTO.getDate()));
             List<Item> items = new ArrayList<>();
             orderDTO.getItems().forEach(itemDTO -> {
@@ -70,6 +71,7 @@ public class EntityConverter implements Converter {
             orderDTO.setDate(order.getDate().format(ISO_LOCAL_DATE_TIME));
             orderDTO.setOrderNumber(order.getOrderNumber());
             orderDTO.setAmount(order.getAmount());
+            orderDTO.setStatus(order.getStatus());
             orderDTO.setEmail(order.getEmail());
             orderDTO.setGeneralSum(order.getGeneralSum());
             List<ItemDTO> itemsDTO = new ArrayList<>();

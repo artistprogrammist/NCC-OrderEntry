@@ -1,7 +1,5 @@
 package com.netcracker.courses.oe.inventory.dto;
 
-import io.swagger.annotations.ApiParam;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -13,18 +11,20 @@ public class OrderDTO implements BaseEntityDTO {
     private double generalSum;
     private int amount;
     private String date;
+    private String status;
     private List<ItemDTO> items;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(long id, String orderNumber, String email, double generalSum, int amount, String date, List<ItemDTO> items) {
+    public OrderDTO(long id, String orderNumber, String email, double generalSum, int amount, String date, String status, List<ItemDTO> items) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.email = email;
         this.generalSum = generalSum;
         this.amount = amount;
         this.date = date;
+        this.status = status;
         this.items = items;
     }
 
@@ -76,6 +76,14 @@ public class OrderDTO implements BaseEntityDTO {
         this.date = date;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<ItemDTO> getItems() {
         return items;
     }
@@ -95,12 +103,13 @@ public class OrderDTO implements BaseEntityDTO {
                 Objects.equals(orderNumber, orderDTO.orderNumber) &&
                 Objects.equals(email, orderDTO.email) &&
                 Objects.equals(date, orderDTO.date) &&
+                Objects.equals(status, orderDTO.status) &&
                 Objects.equals(items, orderDTO.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderNumber, email, generalSum, amount, date, items);
+        return Objects.hash(id, orderNumber, email, generalSum, amount, date, status, items);
     }
 
     @Override
@@ -112,6 +121,7 @@ public class OrderDTO implements BaseEntityDTO {
         sb.append(", generalSum=").append(generalSum);
         sb.append(", amount=").append(amount);
         sb.append(", date='").append(date).append('\'');
+        sb.append(", status='").append(status).append('\'');
         sb.append(", items=").append(items);
         sb.append('}');
         return sb.toString();

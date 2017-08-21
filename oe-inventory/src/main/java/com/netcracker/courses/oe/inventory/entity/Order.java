@@ -18,6 +18,8 @@ public class Order extends BaseEntity {
 
     private int amount;
 
+    private String status;
+
     private LocalDateTime date;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -26,12 +28,14 @@ public class Order extends BaseEntity {
     public Order() {
     }
 
-    public Order(String orderNumber, String email, double generalSum, int amount, LocalDateTime date) {
+    public Order(String orderNumber, String email, double generalSum, int amount, String status, LocalDateTime date, List<Item> items) {
         this.orderNumber = orderNumber;
         this.email = email;
         this.generalSum = generalSum;
         this.amount = amount;
+        this.status = status;
         this.date = date;
+        this.items = items;
     }
 
     public String getOrderNumber() {
@@ -66,6 +70,14 @@ public class Order extends BaseEntity {
         this.amount = amount;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public LocalDateTime getDate() {
         return date;
     }
@@ -92,13 +104,14 @@ public class Order extends BaseEntity {
                 amount == order.amount &&
                 Objects.equals(orderNumber, order.orderNumber) &&
                 Objects.equals(email, order.email) &&
+                Objects.equals(status, order.status) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(items, order.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), orderNumber, email, generalSum, amount, date, items);
+        return Objects.hash(super.hashCode(), orderNumber, email, generalSum, amount, status, date, items);
     }
 
     @Override
@@ -109,6 +122,7 @@ public class Order extends BaseEntity {
         sb.append(", email='").append(email).append('\'');
         sb.append(", generalSum=").append(generalSum);
         sb.append(", amount=").append(amount);
+        sb.append(", status='").append(status).append('\'');
         sb.append(", date=").append(date);
         sb.append(", items=").append(items);
         sb.append('}');
