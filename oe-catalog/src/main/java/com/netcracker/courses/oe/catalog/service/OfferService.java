@@ -3,6 +3,7 @@ package com.netcracker.courses.oe.catalog.service;
 import com.netcracker.courses.oe.catalog.dto.OfferDTO;
 
 import java.util.List;
+import java.util.Set;
 
 public interface OfferService {
 
@@ -16,5 +17,11 @@ public interface OfferService {
 
     void delete(Long id);
 
-    List<OfferDTO> getOffersByCategory(String name);
+    OfferDTO updateOfferByCategory(Long idOffer, String name);
+
+    OfferDTO updateOfferByTag(Long idOffer, String name);
+
+    OfferDTO deleteOfferByTag(Long idOffer, String name);
+
+    List<OfferDTO> findOffersByFilter(Set<String> tagNames, String priceFrom, String priceTo, String category);
 }

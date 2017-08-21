@@ -1,5 +1,6 @@
 package com.netcracker.courses.oe.catalog.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class OfferDTO implements BaseEntityDTO {
@@ -10,17 +11,19 @@ public class OfferDTO implements BaseEntityDTO {
     private String producer;
     private String category;
     private String barcode;
+    private List<String> tags;
 
     public OfferDTO() {
     }
 
-    public OfferDTO(long id, String name, double price, String producer, String category, String barcode) {
+    public OfferDTO(long id, String name, double price, String producer, String category, String barcode, List<String> tags) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.producer = producer;
         this.category = category;
         this.barcode = barcode;
+        this.tags = tags;
     }
 
     public long getId() {
@@ -71,22 +74,31 @@ public class OfferDTO implements BaseEntityDTO {
         this.barcode = barcode;
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OfferDTO that = (OfferDTO) o;
-        return id == that.id &&
-                Double.compare(that.price, price) == 0 &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(producer, that.producer) &&
-                Objects.equals(category, that.category) &&
-                Objects.equals(barcode, that.barcode);
+        OfferDTO offerDTO = (OfferDTO) o;
+        return id == offerDTO.id &&
+                Double.compare(offerDTO.price, price) == 0 &&
+                Objects.equals(name, offerDTO.name) &&
+                Objects.equals(producer, offerDTO.producer) &&
+                Objects.equals(category, offerDTO.category) &&
+                Objects.equals(barcode, offerDTO.barcode) &&
+                Objects.equals(tags, offerDTO.tags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, producer, category, barcode);
+        return Objects.hash(id, name, price, producer, category, barcode, tags);
     }
 
     @Override
@@ -98,7 +110,9 @@ public class OfferDTO implements BaseEntityDTO {
         sb.append(", producer='").append(producer).append('\'');
         sb.append(", category='").append(category).append('\'');
         sb.append(", barcode='").append(barcode).append('\'');
+        sb.append(", tags=").append(tags);
         sb.append('}');
         return sb.toString();
     }
 }
+

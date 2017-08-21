@@ -1,6 +1,8 @@
 package com.netcracker.courses.oe.catalog.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,8 +12,6 @@ public class Offer extends BaseEntity {
 
     private String name;
 
-    private double price;
-
     private String producer;
 
     private String barcode;
@@ -20,15 +20,24 @@ public class Offer extends BaseEntity {
     @JoinColumn(name = "id_category")
     private Category category;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Price price;
+
+    @ManyToMany(targetEntity = Tag.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "tag_offer", joinColumns = {@JoinColumn(name = "id_offer")},
+            inverseJoinColumns = {@JoinColumn(name = "id_tag")})
+    private List<Tag> tags;
+
     public Offer() {
     }
 
-    public Offer(String name, double price, String producer, String barcode, Category category) {
+    public Offer(String name, String producer, String barcode, Category category, Price price, List<Tag> tags) {
         this.name = name;
-        this.price = price;
         this.producer = producer;
         this.barcode = barcode;
         this.category = category;
+        this.price = price;
+        this.tags = tags;
     }
 
     public String getName() {
@@ -37,14 +46,6 @@ public class Offer extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getProducer() {
@@ -71,32 +72,45 @@ public class Offer extends BaseEntity {
         this.category = category;
     }
 
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Offer offer = (Offer) o;
-        return Double.compare(offer.price, price) == 0 &&
-                Objects.equals(name, offer.name) &&
+        return Objects.equals(name, offer.name) &&
                 Objects.equals(producer, offer.producer) &&
-                Objects.equals(barcode, offer.barcode) &&
-                Objects.equals(category, offer.category);
+                Objects.equals(barcode, offer.barcode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, price, producer, barcode, category);
+        return Objects.hash(super.hashCode(), name, producer, barcode);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Offer{");
+        sb.append("id='").append(super.getId()).append('\'');
         sb.append("name='").append(name).append('\'');
-        sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');
         sb.append(", barcode='").append(barcode).append('\'');
-        sb.append(", category=").append(category);
         sb.append('}');
         return sb.toString();
     }

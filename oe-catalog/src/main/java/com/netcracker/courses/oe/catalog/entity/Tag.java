@@ -1,24 +1,26 @@
 package com.netcracker.courses.oe.catalog.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "category", indexes = {@Index(name = "idx_cat_name", columnList = "name")})
-@AttributeOverride(name = "id", column = @Column(name = "id_category"))
-public class Category extends BaseEntity {
+@Table(name = "tag", indexes = {@Index(name = "idx_tag_name", columnList = "name")})
+@AttributeOverride(name = "id", column = @Column(name = "id_tag"))
+public class Tag extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tags")
     private List<Offer> offers;
 
-    public Category() {
+    public Tag() {
     }
 
-    public Category(String name) {
+    public Tag(String name, List<Offer> offers) {
         this.name = name;
+        this.offers = offers;
     }
 
     public String getName() {
@@ -28,6 +30,7 @@ public class Category extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public List<Offer> getOffers() {
         return offers;
@@ -42,21 +45,22 @@ public class Category extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Category category = (Category) o;
-        return Objects.equals(name, category.name) &&
-                Objects.equals(offers, category.offers);
+        Tag tag = (Tag) o;
+        return Objects.equals(name, tag.name) &&
+                Objects.equals(offers, tag.offers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name);
+        return Objects.hash(super.hashCode(), name, offers);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Category{");
+        final StringBuilder sb = new StringBuilder("TagDTO{");
         sb.append("id='").append(super.getId()).append('\'');
         sb.append("name='").append(name).append('\'');
+        sb.append(", offers=").append(offers);
         sb.append('}');
         return sb.toString();
     }

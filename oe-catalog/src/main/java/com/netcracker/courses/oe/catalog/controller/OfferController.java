@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/v1/catalog/offers")
@@ -49,9 +50,27 @@ public class OfferController {
         offerService.delete(id);
     }
 
-    @RequestMapping(value = "/category/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/category/{name}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.CREATED)
+    public OfferDTO updateOfferByCategory(@PathVariable("id") Long idOffer, @PathVariable("name") String name) {
+        return offerService.updateOfferByCategory(idOffer, name);
+    }
+
+    @RequestMapping(value = "/{id}/tag/{name}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.CREATED)
+    public OfferDTO updateOfferByTag(@PathVariable("id") Long idOffer, @PathVariable("name") String name) {
+        return offerService.updateOfferByTag(idOffer, name);
+    }
+
+    @RequestMapping(value = "/{id}/tag/{name}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<OfferDTO> getOffersByCategory(@PathVariable("name") String name) {
-        return offerService.getOffersByCategory(name);
+    public OfferDTO deleteOfferByTag(@PathVariable("id") Long idOffer, @PathVariable("name") String name) {
+        return offerService.deleteOfferByTag(idOffer, name);
+    }
+
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<OfferDTO> findOffersByFilter(@RequestParam(value = "tag", required = false) Set<String> tagNames, @RequestParam(value = "priceFrom", required = false) String priceFrom, @RequestParam(value = "priceTo", required = false) String priceTo, @RequestParam(value = "category", required = false) String category) {
+        return offerService.findOffersByFilter(tagNames, priceFrom, priceTo, category);
     }
 }
