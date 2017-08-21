@@ -7,7 +7,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "item")
 @AttributeOverride(name = "id", column = @Column(name = "id_item"))
-public class InvItem extends BaseEntity {
+public class Item extends BaseEntity {
+
+    private String idOffer;
 
     private String name;
 
@@ -20,19 +22,28 @@ public class InvItem extends BaseEntity {
     private String barcode;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_inv_order")
-    private InvOrder invOrder;
+    @JoinColumn(name = "id_order")
+    private Order order;
 
-    public InvItem() {
+    public Item() {
     }
 
-    public InvItem(String name, double price, String producer, String category, String barcode, InvOrder invOrder) {
+    public Item(String idOffer, String name, double price, String producer, String category, String barcode, Order order) {
+        this.idOffer = idOffer;
         this.name = name;
         this.price = price;
         this.producer = producer;
         this.category = category;
         this.barcode = barcode;
-        this.invOrder = invOrder;
+        this.order = order;
+    }
+
+    public String getIdOffer() {
+        return idOffer;
+    }
+
+    public void setIdOffer(String idOffer) {
+        this.idOffer = idOffer;
     }
 
     public String getName() {
@@ -75,12 +86,12 @@ public class InvItem extends BaseEntity {
         this.barcode = barcode;
     }
 
-    public InvOrder getInvOrder() {
-        return invOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setInvOrder(InvOrder invOrder) {
-        this.invOrder = invOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
@@ -88,29 +99,32 @@ public class InvItem extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        InvItem invItem = (InvItem) o;
-        return Double.compare(invItem.price, price) == 0 &&
-                Objects.equals(name, invItem.name) &&
-                Objects.equals(producer, invItem.producer) &&
-                Objects.equals(category, invItem.category) &&
-                Objects.equals(barcode, invItem.barcode) &&
-                Objects.equals(invOrder, invItem.invOrder);
+        Item item = (Item) o;
+        return Double.compare(item.price, price) == 0 &&
+                Objects.equals(idOffer, item.idOffer) &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(producer, item.producer) &&
+                Objects.equals(category, item.category) &&
+                Objects.equals(barcode, item.barcode) &&
+                Objects.equals(order, item.order);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, price, producer, category, barcode, invOrder);
+        return Objects.hash(super.hashCode(), idOffer, name, price, producer, category, barcode, order);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("InvItem{");
-        sb.append("name='").append(name).append('\'');
+        final StringBuilder sb = new StringBuilder("Item{");
+        sb.append("idItem='").append(getId()).append('\'');
+        sb.append("idOffer='").append(idOffer).append('\'');
+        sb.append(", name='").append(name).append('\'');
         sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');
         sb.append(", category='").append(category).append('\'');
         sb.append(", barcode='").append(barcode).append('\'');
-        sb.append(", invOrder=").append(invOrder);
+        sb.append(", order=").append(order);
         sb.append('}');
         return sb.toString();
     }

@@ -29,8 +29,8 @@ public class DataSourceConfig {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName(driver);
         hikariConfig.setJdbcUrl(url);
-        hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
+        hikariConfig.setUsername(username);
         hikariConfig.setMaximumPoolSize(poolSize);
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         return dataSource;

@@ -1,18 +1,18 @@
 package com.netcracker.courses.oe.inventory.service;
 
-import com.netcracker.courses.oe.inventory.dto.InvOrderDTO;
+import com.netcracker.courses.oe.inventory.dto.OrderDTO;
 
 import java.util.List;
 
 public interface InventoryService {
 
-    InvOrderDTO save(InvOrderDTO invOrderDTO);
+    OrderDTO save(OrderDTO orderDTO);
 
-    InvOrderDTO update(InvOrderDTO invOrderDTO);
+    OrderDTO update(OrderDTO orderDTO);
 
-    List<InvOrderDTO> getAllInvOrders();
+    List<OrderDTO> getAllInvOrders();
 
-    InvOrderDTO getInvOrder(Long id);
+    OrderDTO getInvOrder(Long id);
 
     void delete(Long id);
 }

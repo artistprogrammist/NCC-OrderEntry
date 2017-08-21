@@ -3,20 +3,22 @@ package com.netcracker.courses.oe.inventory.dto;
 
 import java.util.Objects;
 
-public class InvItemDTO implements BaseEntityDTO {
+public class ItemDTO implements BaseEntityDTO {
 
     private long id;
+    private String idOffer;
     private String name;
     private double price;
     private String producer;
     private String category;
     private String barcode;
 
-    public InvItemDTO() {
+    public ItemDTO() {
     }
 
-    public InvItemDTO(long id, String name, double price, String producer, String category, String barcode) {
+    public ItemDTO(long id, String idOffer, String name, double price, String producer, String category, String barcode) {
         this.id = id;
+        this.idOffer = idOffer;
         this.name = name;
         this.price = price;
         this.producer = producer;
@@ -30,6 +32,14 @@ public class InvItemDTO implements BaseEntityDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getIdOffer() {
+        return idOffer;
+    }
+
+    public void setIdOffer(String idOffer) {
+        this.idOffer = idOffer;
     }
 
     public String getName() {
@@ -76,24 +86,26 @@ public class InvItemDTO implements BaseEntityDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InvItemDTO that = (InvItemDTO) o;
-        return id == that.id &&
-                Double.compare(that.price, price) == 0 &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(producer, that.producer) &&
-                Objects.equals(category, that.category) &&
-                Objects.equals(barcode, that.barcode);
+        ItemDTO itemDTO = (ItemDTO) o;
+        return id == itemDTO.id &&
+                Double.compare(itemDTO.price, price) == 0 &&
+                Objects.equals(idOffer, itemDTO.idOffer) &&
+                Objects.equals(name, itemDTO.name) &&
+                Objects.equals(producer, itemDTO.producer) &&
+                Objects.equals(category, itemDTO.category) &&
+                Objects.equals(barcode, itemDTO.barcode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, producer, category, barcode);
+        return Objects.hash(id, idOffer, name, price, producer, category, barcode);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("InvItemDTO{");
+        final StringBuilder sb = new StringBuilder("ItemDTO{");
         sb.append("id=").append(id);
+        sb.append(", idOffer='").append(idOffer).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');

@@ -1,12 +1,10 @@
 package com.netcracker.courses.oe.inventory.service;
 
-
-import com.netcracker.courses.oe.inventory.dto.InvOrderDTO;
-import com.netcracker.courses.oe.inventory.entity.InvOrder;
+import com.netcracker.courses.oe.inventory.dto.OrderDTO;
+import com.netcracker.courses.oe.inventory.entity.Order;
 import com.netcracker.courses.oe.inventory.exception.EntityNotFoundException;
 import com.netcracker.courses.oe.inventory.repository.InventoryRepository;
-import com.netcracker.courses.oe.inventory.service.InventoryService;
-import com.netcracker.courses.oe.inventory.service.helper.Converter;
+import com.netcracker.courses.oe.inventory.service.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -27,27 +25,27 @@ public class SimpleInventoryService implements InventoryService {
     }
 
     @Override
-    public InvOrderDTO save(InvOrderDTO invOrderDTO) {
-        InvOrder invOrder = converter.toInvOrder(invOrderDTO);
-        InvOrder saveInvOrder = inventoryRepository.save(invOrder);
-        return converter.toInvOrderDTO(saveInvOrder);
+    public OrderDTO save(OrderDTO orderDTO) {
+        Order order = converter.toOrder(orderDTO);
+        Order saveOrder = inventoryRepository.save(order);
+        return converter.toOrderDTO(saveOrder);
     }
 
     @Override
-    public InvOrderDTO update(InvOrderDTO invOrderDTO) {
-        return save(invOrderDTO);
+    public OrderDTO update(OrderDTO orderDTO) {
+        return save(orderDTO);
     }
 
     @Override
-    public List<InvOrderDTO> getAllInvOrders() {
-        List<InvOrder> allInvOrder = inventoryRepository.findAll();
-        return converter.toInvOrdersDTO(allInvOrder);
+    public List<OrderDTO> getAllInvOrders() {
+        List<Order> allOrder = inventoryRepository.findAll();
+        return converter.toOrdersDTO(allOrder);
     }
 
     @Override
-    public InvOrderDTO getInvOrder(Long id) {
-        InvOrder oneInvOrder = inventoryRepository.findOne(id);
-        return converter.toInvOrderDTO(oneInvOrder);
+    public OrderDTO getInvOrder(Long id) {
+        Order oneOrder = inventoryRepository.findOne(id);
+        return converter.toOrderDTO(oneOrder);
     }
 
     @Override
