@@ -47,7 +47,7 @@ public class SimpleOfferService implements OfferService {
     public OfferDTO save(OfferDTO offerDTO) {
         Offer offer = converter.toOffer(offerDTO);
         Category category = categoryRepository.findFirstByName(offerDTO.getCategory());
-        if (category == null || category.getName().equals(offer.getCategory())) {
+        if (category == null || category.getName().equals(offer.getCategory().getName())) {
             Category categorySave = categoryRepository.save(new Category(offerDTO.getCategory()));
             offer.setCategory(categorySave);
         } else {
@@ -57,11 +57,11 @@ public class SimpleOfferService implements OfferService {
         if (offer.getTags() != null) {
             offer.getTags().forEach(tag -> {
                 Tag tagByName = tagRepository.findFirstByName(tag.getName());
-                if (tagByName == null || tagByName.getName().equals(tag.getName())) {
+                if (tagByName == null || !(tagByName.getName().equals(tag.getName()))) {
                     Tag tagSave = tagRepository.save(tag);
                     tags.add(tagSave);
                 } else {
-                    tags.add(tag);
+                    tags.add(tagByName);
                 }
             });
             offer.setTags(tags);
@@ -128,10 +128,22 @@ public class SimpleOfferService implements OfferService {
 
     @Override
     public List<OfferDTO> findOffersByFilter(Set<String> tagNames, String priceFrom, String priceTo, String category) {
-        //todo filtering price
+        //todo impl new filtering price
+        List<Offer> offers = new ArrayList<>();
+        List<Offer> all = new ArrayList<>();
         Filter filter = createFilter(tagNames, priceFrom, priceTo, category);
-        List<Offer> allByCategoryAndTags = offerRepository.findAllByCategoryOrTags(filter.getCategory(), filter.getTags());
-        return converter.toOffersDTO(allByCategoryAndTags);
+        if (filter.getCategory() != null) {
+            all.addAll(offerRepository.findAllByCategoryOrTags(filter.getCategory(), filter.getTags()));
+        } else {
+            all.addAll(offerRepository.findAllByTags(filter.getTags()));
+        }
+        all.forEach(offer -> {
+            double currencyValue = offer.getPrice().getCurrencyValue();
+            if (currencyValue >= filter.getPriceFrom() && currencyValue <= filter.getPriceTo()) {
+                offers.add(offer);
+            }
+        });
+        return converter.toOffersDTO(offers);
     }
 
     private Filter createFilter(Set<String> tagNames, String priceFrom, String priceTo, String category) {

@@ -60,7 +60,6 @@ public class Tag extends BaseEntity {
         final StringBuilder sb = new StringBuilder("TagDTO{");
         sb.append("id='").append(super.getId()).append('\'');
         sb.append("name='").append(name).append('\'');
-        sb.append(", offers=").append(offers);
         sb.append('}');
         return sb.toString();
     }
