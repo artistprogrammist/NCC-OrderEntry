@@ -1,7 +1,8 @@
 package com.netcracker.courses.oe.processor.controller;
 
-import com.netcracker.courses.oe.processor.dto.processor.EntityParameterDTO;
+import com.netcracker.courses.oe.processor.dto.processor.ItemOperationParameterDTO;
 import com.netcracker.courses.oe.processor.dto.processor.OrderDTO;
+import com.netcracker.courses.oe.processor.dto.processor.PayParameterDTO;
 import com.netcracker.courses.oe.processor.service.ProcessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,19 +29,31 @@ public class ProcessorController {
 
     @RequestMapping(value = "/item", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO addItem(@RequestBody EntityParameterDTO entityParameterDTO) {
-        return processorService.addItem(entityParameterDTO);
+    public OrderDTO addItem(@RequestBody ItemOperationParameterDTO itemOperationParameterDTO) {
+        return processorService.addItem(itemOperationParameterDTO);
     }
 
-    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/status/{status}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderDTO> showAllOrders() {
-        return processorService.showAllOrders();
+    public List<OrderDTO> showOrdersByStatus(@PathVariable("status") String status) {
+        return processorService.showOrdersByStatus(status);
+    }
+
+    @RequestMapping(value = "/orders/email/{email}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<OrderDTO> showOrdersByEmail(@PathVariable("email") String email) {
+        return processorService.showOrdersByEmail(email);
     }
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO pay(@RequestBody String email) {
-        return processorService.payOrder(email);
+    public OrderDTO pay(@RequestBody PayParameterDTO payParameter) {
+        return processorService.payOrder(payParameter.getEmail(), payParameter.getOrderNumber());
+    }
+
+    @RequestMapping(value = "/item", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDTO deleteItem(@RequestBody ItemOperationParameterDTO itemOperationParameterDTO) {
+        return processorService.deleteItem(itemOperationParameterDTO);
     }
 }

@@ -37,13 +37,19 @@ public class SimpleInventoryService implements InventoryService {
     }
 
     @Override
-    public List<OrderDTO> getAllInvOrders() {
+    public List<OrderDTO> getAllOrders() {
         List<Order> allOrder = inventoryRepository.findAll();
         return converter.toOrdersDTO(allOrder);
     }
 
     @Override
-    public OrderDTO getInvOrder(Long id) {
+    public List<OrderDTO> getOrders(String email) {
+        List<Order> allByEmail = inventoryRepository.findAllByEmail(email);
+        return converter.toOrdersDTO(allByEmail);
+    }
+
+    @Override
+    public OrderDTO getOrder(Long id) {
         Order oneOrder = inventoryRepository.findOne(id);
         return converter.toOrderDTO(oneOrder);
     }

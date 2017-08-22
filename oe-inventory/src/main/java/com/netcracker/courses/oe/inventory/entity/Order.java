@@ -124,7 +124,6 @@ public class Order extends BaseEntity {
         sb.append(", amount=").append(amount);
         sb.append(", status='").append(status).append('\'');
         sb.append(", date=").append(date);
-        sb.append(", items=").append(items);
         sb.append('}');
         return sb.toString();
     }

@@ -10,9 +10,11 @@ public interface InventoryService {
 
     OrderDTO update(OrderDTO orderDTO);
 
-    List<OrderDTO> getAllInvOrders();
+    List<OrderDTO> getAllOrders();
 
-    OrderDTO getInvOrder(Long id);
+    List<OrderDTO> getOrders(String email);
+
+    OrderDTO getOrder(Long id);
 
     void delete(Long id);
 }

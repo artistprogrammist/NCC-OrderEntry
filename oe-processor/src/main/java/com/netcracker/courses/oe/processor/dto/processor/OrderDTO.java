@@ -8,17 +8,43 @@ import java.util.Objects;
 
 public class OrderDTO implements BaseEntityDTO {
 
+    private long id;
+    private String orderNumber;
     private String email;
     private double generalSum;
+    private int amount;
+    private String date;
+    private String status;
     private List<ItemDTO> items = new ArrayList<>();
 
     public OrderDTO() {
     }
 
-    public OrderDTO(String email, double generalSum, String typeCurrency, List<ItemDTO> items) {
+    public OrderDTO(long id, String orderNumber, String email, double generalSum, int amount, String date, String status, List<ItemDTO> items) {
+        this.id = id;
+        this.orderNumber = orderNumber;
         this.email = email;
         this.generalSum = generalSum;
+        this.amount = amount;
+        this.date = date;
+        this.status = status;
         this.items = items;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public String getEmail() {
@@ -37,6 +63,30 @@ public class OrderDTO implements BaseEntityDTO {
         this.generalSum = generalSum;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<ItemDTO> getItems() {
         return items;
     }
@@ -50,21 +100,31 @@ public class OrderDTO implements BaseEntityDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDTO orderDTO = (OrderDTO) o;
-        return Double.compare(orderDTO.generalSum, generalSum) == 0 &&
+        return id == orderDTO.id &&
+                Double.compare(orderDTO.generalSum, generalSum) == 0 &&
+                amount == orderDTO.amount &&
+                Objects.equals(orderNumber, orderDTO.orderNumber) &&
                 Objects.equals(email, orderDTO.email) &&
+                Objects.equals(date, orderDTO.date) &&
+                Objects.equals(status, orderDTO.status) &&
                 Objects.equals(items, orderDTO.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, generalSum, items);
+        return Objects.hash(id, orderNumber, email, generalSum, amount, date, status, items);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("OrderDTO{");
-        sb.append("email='").append(email).append('\'');
+        sb.append("id=").append(id);
+        sb.append(", orderNumber='").append(orderNumber).append('\'');
+        sb.append(", email='").append(email).append('\'');
         sb.append(", generalSum=").append(generalSum);
+        sb.append(", amount=").append(amount);
+        sb.append(", date='").append(date).append('\'');
+        sb.append(", status='").append(status).append('\'');
         sb.append(", items=").append(items);
         sb.append('}');
         return sb.toString();

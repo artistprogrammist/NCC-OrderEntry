@@ -4,16 +4,18 @@ import com.netcracker.courses.oe.processor.dto.BaseEntityDTO;
 
 import java.util.Objects;
 
-public class EntityParameterDTO implements BaseEntityDTO {
+public class ItemOperationParameterDTO implements BaseEntityDTO {
 
     private String email;
+    private String orderNumber;
     private Long idItem;
 
-    public EntityParameterDTO() {
+    public ItemOperationParameterDTO() {
     }
 
-    public EntityParameterDTO(String email, Long idItem) {
+    public ItemOperationParameterDTO(String email, String orderNumber, Long idItem) {
         this.email = email;
+        this.orderNumber = orderNumber;
         this.idItem = idItem;
     }
 
@@ -23,6 +25,14 @@ public class EntityParameterDTO implements BaseEntityDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Long getIdItem() {
@@ -37,20 +47,22 @@ public class EntityParameterDTO implements BaseEntityDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EntityParameterDTO that = (EntityParameterDTO) o;
+        ItemOperationParameterDTO that = (ItemOperationParameterDTO) o;
         return Objects.equals(email, that.email) &&
+                Objects.equals(orderNumber, that.orderNumber) &&
                 Objects.equals(idItem, that.idItem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, idItem);
+        return Objects.hash(email, orderNumber, idItem);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("EntityParameterDTO{");
+        final StringBuilder sb = new StringBuilder("ItemOperationParameterDTO{");
         sb.append("email='").append(email).append('\'');
+        sb.append(", orderNumber='").append(orderNumber).append('\'');
         sb.append(", idItem=").append(idItem);
         sb.append('}');
         return sb.toString();

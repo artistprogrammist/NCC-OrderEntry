@@ -1,5 +1,6 @@
 package com.netcracker.courses.oe.processor.dto.processor;
 
+
 import com.netcracker.courses.oe.processor.dto.BaseEntityDTO;
 
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 public class ItemDTO implements BaseEntityDTO {
 
     private long id;
+    private String idOffer;
     private String name;
     private double price;
     private String producer;
@@ -16,8 +18,9 @@ public class ItemDTO implements BaseEntityDTO {
     public ItemDTO() {
     }
 
-    public ItemDTO(long id, String name, double price, String producer, String category, String barcode) {
+    public ItemDTO(long id, String idOffer, String name, double price, String producer, String category, String barcode) {
         this.id = id;
+        this.idOffer = idOffer;
         this.name = name;
         this.price = price;
         this.producer = producer;
@@ -31,6 +34,14 @@ public class ItemDTO implements BaseEntityDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getIdOffer() {
+        return idOffer;
+    }
+
+    public void setIdOffer(String idOffer) {
+        this.idOffer = idOffer;
     }
 
     public String getName() {
@@ -80,6 +91,7 @@ public class ItemDTO implements BaseEntityDTO {
         ItemDTO itemDTO = (ItemDTO) o;
         return id == itemDTO.id &&
                 Double.compare(itemDTO.price, price) == 0 &&
+                Objects.equals(idOffer, itemDTO.idOffer) &&
                 Objects.equals(name, itemDTO.name) &&
                 Objects.equals(producer, itemDTO.producer) &&
                 Objects.equals(category, itemDTO.category) &&
@@ -88,13 +100,14 @@ public class ItemDTO implements BaseEntityDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, producer, category, barcode);
+        return Objects.hash(id, idOffer, name, price, producer, category, barcode);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ItemDTO{");
         sb.append("id=").append(id);
+        sb.append(", idOffer='").append(idOffer).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", price=").append(price);
         sb.append(", producer='").append(producer).append('\'');
