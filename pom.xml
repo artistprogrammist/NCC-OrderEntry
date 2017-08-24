@@ -21,6 +21,7 @@
         <module>oe-catalog</module>
         <module>oe-inventory</module>
         <module>oe-processor</module>
+        <module>oe-user-management</module>
     </modules>
 
     <properties>
