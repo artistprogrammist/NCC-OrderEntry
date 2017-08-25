@@ -1,4 +1,4 @@
-package com.netcracker.courses.oe.customer;
+package com.netcracker.courses.oe.user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

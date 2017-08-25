@@ -5,7 +5,7 @@
 
     <groupId>com.netcracker.courses</groupId>
     <artifactId>oe</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0.RELEASE</version>
     <packaging>pom</packaging>
 
     <name>oe</name>
@@ -29,6 +29,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <springfox-swagger2>2.7.0</springfox-swagger2>
+        <docker.host>https://192.168.99.100:2376</docker.host>
     </properties>
 
     <dependencies>
@@ -60,14 +61,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

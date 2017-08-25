@@ -1,0 +1,48 @@
+version: "3"
+services:
+  catalog:
+    container_name: catalog
+    image: catalog:latest
+    restart: always
+    environment:
+      - SERVER_PORT=9090
+      - DB_HOST=10.229.90.50
+      - DB_PORT=5432
+    ports:
+      - "9090:9090"
+
+  inventory:
+    container_name: inventory
+    image: inventory:latest
+    restart: always
+    environment:
+      - SERVER_PORT=9091
+      - DB_HOST=10.229.90.50
+      - DB_PORT=5432
+    ports:
+      - "9091:9091"
+
+  processor:
+    container_name: processor
+    image: processor:latest
+    restart: always
+    environment:
+      - SERVER_PORT=9092
+      - CATALOG_HOST=http://192.168.99.100
+      - CATALOG_PORT=9090
+      - INVENTORY_HOST=http://192.168.99.100
+      - INVENTORY_PORT=9091
+
+    ports:
+      - "9092:9092"
+
+  user-management:
+    container_name: user-management
+    image: user-management:latest
+    restart: always
+    environment:
+      - SERVER_PORT=9093
+      - DB_HOST=10.229.90.50
+      - DB_PORT=5432
+    ports:
+      - "9093:9093"
